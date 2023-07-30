@@ -27,7 +27,7 @@ services:
             dockerfile: prod.Dockerfile
             target: final
         ports:
-            - 4000:4000
+            - 4000:10000
         env_file:
             - /etc/secrets/.env.production
         depends_on:
