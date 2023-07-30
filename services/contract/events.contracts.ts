@@ -28,8 +28,6 @@ export default function ContractEventsServices(contracts: Contracts, providers: 
 
             providers[chain].on(filter, (log) => {
                 const parsedLog = contract.interface.parseLog(log);
-                console.log(parsedLog);
-
                 insertEvent({ ...parsedLog, chain }).catch(error => {
                     console.error(error);
                 });

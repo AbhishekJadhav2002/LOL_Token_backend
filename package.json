@@ -5,8 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "dev": "env-cmd -f .env.development npx nodemon",
-    "start": "env-cmd -f .env.development ts-node index.ts",
-    "build": "npx tsc",
+    "start": "node build/index.ts",
+    "build": "npx tsc -p .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "contracts": "typechain --target ethers-v6 --out-dir types/contracts 'config/abi/*.json'"
   },
@@ -36,6 +36,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
+    "amqplib": "^0.10.3",
     "cors": "^2.8.5",
     "ethers": "^6.6.5",
     "express": "^4.18.2",

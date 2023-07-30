@@ -1,5 +1,4 @@
-// import { ContractControllers } from "../controllers";
-// import { ContractRoutes } from "../routes";
+import { TransactionControllers } from "../controllers";
 import { ContractEventsServices, ContractServices } from "../services";
 import contracts, { providers } from "./contracts.config";
 
@@ -7,9 +6,6 @@ const contractServices = ContractServices(contracts);
 
 const { init } = ContractEventsServices(contracts, providers);
 
-// const contractControllers = ContractControllers(contractServices);
+const transactionsControllers = TransactionControllers(contractServices);
 
-// const contractRoutes = ContractRoutes(contractControllers);
-
-export { init };
-
+export { init, transactionsControllers };

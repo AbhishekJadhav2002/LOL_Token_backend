@@ -1,4 +1,3 @@
-import { ethers } from "ethers";
 import { Events as EventsModel } from "../../models";
 import { Chains, Events, EventsServices, TransactionData } from "../../types";
 
@@ -12,9 +11,9 @@ export default function EventsServices(): EventsServices {
         }
     };
 
-    async function getEvents(address: string, eventName: Events, chain: Chains) {
+    async function getEvents(address: string, chain: Chains, eventName?: Events) {
         try {
-            const result = await EventsModel.find({ "args.1": ethers.zeroPadValue(address, 32), $name: eventName, chain });
+            const result = await EventsModel.find({  "args.0": address, chain, [eventName ? "name" : '']: eventName }, 'chain name args fragment createdAt');
             return result;
         } catch (error) {
             throw error;

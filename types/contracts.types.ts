@@ -14,16 +14,16 @@ type TransactionData = any[] | {};
 interface TransactionControllers {
     getBalance(req: Request, res: Response, next: NextFunction): Promise<void>;
     getTransactions(req: Request, res: Response, next: NextFunction): Promise<void>;
-    transfer(req: Request, res: Response, next: NextFunction): Promise<void>;
+    // transfer(req: Request, res: Response, next: NextFunction): Promise<void>;
 }
 
 interface EventsServices {
-    getEvents: (address: string, eventName: Events, network: Chains) => Promise<any>;
+    getEvents: (address: string, chain: Chains, eventName?: Events) => Promise<any>;
     insertEvent: (data: TransactionData) => Promise<any>;
 }
 
 interface ContractServices {
-    getBalanceOf: (address: string, network: Chains) => Promise<string>;
+    getBalanceOf: (address: string, chain: Chains) => Promise<string>;
 }
 
 export { ContractServices, Contracts, Events, EventsServices, Providers, TransactionControllers, TransactionData };

@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+    rabbitmq:
+        container_name: rabbitmq
+        image: rabbitmq:3.13-rc
+        ports:
+            - 5672:5672
+            - 15672:15672
+        volumes:
+            - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+            - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+        networks:
+            - rabbitmq_net
+        healthcheck:
+            test: [ "CMD", "rabbitmqctl", "status" ]
+            interval: 5s
+            timeout: 20s
+            retries: 5
+        restart: on-failure
+
+    node_app:
+        container_name: lol_token_backend
+        image: abhishekjadhav2002/lol_token_backend:base
+        build:
+            context: .
+            dockerfile: prod.Dockerfile
+            target: final
+        ports:
+            - 4000:4000
+        env_file:
+            - .env.production
+        depends_on:
+            rabbitmq:
+                condition: service_healthy
+        networks:
+            - rabbitmq_net
+        restart: on-failure
+
+networks:
+    rabbitmq_net:
+        driver: bridge
