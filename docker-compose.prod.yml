@@ -29,7 +29,7 @@ services:
         ports:
             - 4000:4000
         env_file:
-            - .env.production
+            - /etc/secrets/.env.production
         depends_on:
             rabbitmq:
                 condition: service_healthy
