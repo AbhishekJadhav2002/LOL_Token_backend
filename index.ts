@@ -18,7 +18,7 @@ app.listen(parseInt(process.env.PORT as string) || 4000, async () => {
         await connectDatabase();
         init('bsc');
         init('eth');
-        await QueueServices();
+        // await QueueServices();
         console.log(`🚀 Server is running on port ${process.env.PORT || 4000}`);
     } catch (error) {
         console.error(error);
